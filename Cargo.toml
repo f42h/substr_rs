@@ -2,5 +2,8 @@
 name = "substr_rs"
 version = "0.1.0"
 edition = "2024"
+description = "Easy substring extraction"
+license = "MIT"
+repository = "https://github.com/f42h/substr_rs"
 
 [dependencies]
