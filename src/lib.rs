@@ -74,7 +74,6 @@ impl Substring {
     /// # Returns
     /// - `Option<String>` containing the extracted substring if both regex patterns match
     ///   in correct order; otherwise, `None`.
-    #[must_use]
     pub fn from_regex(strval: &str, start: &str, end: &str) -> Option<String> {
         // Compile the regex patterns
         let start_re = Regex::new(start).ok()?;
