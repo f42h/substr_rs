@@ -7,3 +7,4 @@ license = "MIT"
 repository = "https://github.com/f42h/substr_rs"
 
 [dependencies]
+regex = "1.11.1"

@@ -22,6 +22,8 @@
 *  SOFTWARE.
 */
 
+use regex::Regex;
+
 pub struct Substring;
 impl Substring {
     /// Extracts a substring from `strval` starting after the first occurrence of `start`
@@ -60,6 +62,41 @@ impl Substring {
 
         None
     }
+
+    /// Extracts a substring from `strval` starting after the first match of the `start` regex
+    /// and ending before the first match of the `end` regex.
+    ///
+    /// # Parameters
+    /// - `strval`: The input string from which the substring will be extracted.
+    /// - `start`: A regex pattern marking where the substring begins.
+    /// - `end`: A regex pattern marking where the substring ends.
+    ///
+    /// # Returns
+    /// - `Option<String>` containing the extracted substring if both regex patterns match
+    ///   in correct order; otherwise, `None`.
+    #[must_use]
+    pub fn from_regex(strval: &str, start: &str, end: &str) -> Option<String> {
+        // Compile the regex patterns
+        let start_re = Regex::new(start).ok()?;
+        let end_re = Regex::new(end).ok()?;
+
+        // Find the first match of the start pattern in the input string
+        let start_match = start_re.find(strval)?;
+        // Calculate the index immediately after the start match
+        let start_pos_from_idx = start_match.end();
+
+        // Find the first match of the end pattern starting from the calculated index
+        let end_match = end_re.find_at(strval, start_pos_from_idx)?;
+        // Determine the starting index of the end match
+        let end_pos_to_idx = end_match.start();
+
+        if start_match.start() < end_pos_to_idx {
+            // Return the substring section
+            return Some(strval[start_pos_from_idx..end_pos_to_idx].to_string());
+        }
+
+        None
+    }
 }
 
 #[cfg(test)]
@@ -75,6 +112,19 @@ mod tests {
     #[test]
     fn get_substring_between_strings() {
         Substring::from("SomeSubstringData", "Some", "Data")
-            .map(|s| assert_eq!(s, "Substring"));
+            .map(|s| assert_eq!(s, "Substringd"));
+    }
+
+    #[test]
+    fn get_substring_regex() {
+        let result = Substring::from_regex(
+            "<script id='main'>console.log('Hello, World!');</script>",
+            "<script[^>]*>",
+            "</script"
+        )
+        .unwrap();
+
+        assert_eq!(result, "console.log('Hello, World!');");
     }
 }
+ 

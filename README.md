@@ -2,7 +2,7 @@
 
 ### Description
 ```
-Extract substrings either by characters or by strings
+Extract substrings either by characters, by strings or between regex patterns
 ```
 
 ### Usage
@@ -36,5 +36,24 @@ if let Some(substring_between_strings) = Substring::from("SomeSubstringData", "S
         substring_between_strings
     );
     // Output: The substring of "SomeSubstringData" between the strings "Some" and "Data" is Substring
+}
+```
+
+- Using regex patterns
+``` rust
+if let Some(substring_between_strings) = Substring::from_regex(
+    "<script id='main'>console.log('Hello, World!');</script>", 
+    "<script[^>]*>", 
+    "</script"
+) {
+    println!(
+        "The substring of \"<script id='main'>console.log('Hello, World!');</script>\" 
+        between the patterns \"<script[^>]*>\" and \"</script\" is {}", 
+        substring_between_strings
+    );
+    // Output: 
+    // The substring of "<script id='main'>console.log('Hello, World!');</script>" 
+    // between the patterns "<script[^>]*>" and "</script" is
+    // console.log('Hello, World!');
 }
 ```
