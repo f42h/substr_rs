@@ -74,6 +74,7 @@ impl Substring {
     /// # Returns
     /// - `Option<String>` containing the extracted substring if both regex patterns match
     ///   in correct order; otherwise, `None`.
+    #[must_use]
     pub fn from_regex(strval: &str, start: &str, end: &str) -> Option<String> {
         // Compile the regex patterns
         let start_re = Regex::new(start).ok()?;
@@ -108,6 +109,7 @@ impl Substring {
     /// # Returns
     /// - `Option<String>` containing the extracted substring if the indices are valid;
     ///   otherwise, `None`.
+    #[must_use]
     pub fn from_index(strval: &str, start: usize, end: usize) -> Option<String> {
         // Check if the indices are within bounds and valid
         if start < end && end <= strval.len() {
