@@ -134,5 +134,7 @@ if let Some(substr) = Substring::from_regex(string_value, start_pattern, end_pat
 //  patterns `<script[^>]*>` and `</script` is console.log('Hello, World!');
 ```
 
+#### See all examples [here](https://github.com/f42h/substr_rs/blob/main/examples/main.rs).
+
 ## License
 This project is published under the [MIT](https://github.com/f42h/substr_rs/blob/main/LICENSE) License. See the LICENSE file for more details.
