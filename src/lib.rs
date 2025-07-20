@@ -96,6 +96,27 @@ impl Substring {
 
         None
     }
+
+    /// Extracts a substring from `strval` starting at the given `start` index
+    /// and ending at the given `end` index.
+    ///
+    /// # Parameters
+    /// - `strval`: The input string from which the substring will be extracted.
+    /// - `start`: The starting index where the substring begins.
+    /// - `end`: The ending index where the substring ends.
+    ///
+    /// # Returns
+    /// - `Option<String>` containing the extracted substring if the indices are valid;
+    ///   otherwise, `None`.
+    pub fn from_index(strval: &str, start: usize, end: usize) -> Option<String> {
+        // Check if the indices are within bounds and valid
+        if start < end && end <= strval.len() {
+            // Return the substring section
+            return Some(strval[start..end].to_string());
+        }
+
+        None
+    }
 }
 
 #[cfg(test)]
@@ -111,7 +132,7 @@ mod tests {
     #[test]
     fn get_substring_between_strings() {
         Substring::from("SomeSubstringData", "Some", "Data")
-            .map(|s| assert_eq!(s, "Substringd"));
+            .map(|s| assert_eq!(s, "Substring"));
     }
 
     #[test]
@@ -124,6 +145,12 @@ mod tests {
         .unwrap();
 
         assert_eq!(result, "console.log('Hello, World!');");
+    }
+
+    #[test]
+    fn get_substring_index() {
+        Substring::from_index("SomeSubstringData", 4, 13)
+            .map(|s| assert_eq!(s, "Substring"));
     }
 }
  

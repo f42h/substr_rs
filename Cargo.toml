@@ -1,10 +1,11 @@
 [package]
 name = "substr_rs"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2024"
 description = "Easy substring extraction"
 license = "MIT"
 repository = "https://github.com/f42h/substr_rs"
+keywords = ["substring", "regex", "extract"]
 
 [dependencies]
 regex = "1.11.1"
